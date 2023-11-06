@@ -1,34 +1,35 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Stack from 'react-bootstrap/Stack';
-
-
+import React from "react";
+import { Container, Nav, Navbar, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
-    <Stack direction="horizontal" gap={5}>
-      <div className="p-2" style={{width:"25%"}}>
-      <img className='main_logo'style={{width:"50px",height:"50px",alignItems:"left"}} src="https://blog.kakaocdn.net/dn/cadAZd/btqwUCGSDXw/sw1BupJqV7jZWvTj1jNdk1/img.jpg" alt="" />
-      </div>
-      <div className="p-2 ms-auto"style={{width:"50%"}}>
-      <InputGroup className="mb-3" >
-        <Form.Control
-          placeholder="이미지를 검색해보세요!"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-        />
-        <Button variant="outline-secondary" id="button-addon2">
-         검색
-        </Button>
-      </InputGroup>
-      </div>
-      <div className="vr" />
-      <div className="p-2" style={{width:"25%"}}>
-      <img src="mycircle.png" alt="" style={{width:"50px",height:"50px",alignItems:"right"}}/>
-      </div>
-    </Stack>
-  )
-}
+    <div>
+      <Navbar bg="light" expand="lg" className="justify-content-between">
+      <Container>
+        <Navbar.Brand href="#" className="navbar-brand">딸깍</Navbar.Brand>
+        <Nav className="me-auto">
+          <Link className="nav-link" to="#">이미지 생성</Link>
+          <Link className="nav-link" to="#">굿즈 페이지</Link>
+        </Nav>
+        <Nav>
+          <Link className="nav-link" to="#">
+            <Button variant="outline-primary" size="sm" className="btn">
+              로그인
+            </Button>
+          </Link>
+          <Link className="nav-link" to="#">
+            <Button variant="outline-primary" size="sm" className="btn">
+              회원가입
+            </Button>
+          </Link>
+          <Link className="nav-link" to="#">
+            <img src="./images/basket.png" alt="Basket" className="basket"/>
+          </Link>
+        </Nav>
+      </Container>
+    </Navbar>
+    </div>
+  );
+};
 
-export default Header
+export default Header;
