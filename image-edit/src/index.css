@@ -20,7 +20,7 @@ code {
 
 .img-row-control{
   width:100%;
-  padding-top: 5px;
+  padding-top: 20px;
 }
 .product-cover{
   text-align:center;
@@ -62,3 +62,7 @@ code {
   margin-left: 0.5rem; /* 이미지와 다른 요소 사이의 여백을 추가 */
 }
 
+/* 굿즈페이지 상단버튼 */
+.goods-btn{
+  margin: 10px 20px;
+}

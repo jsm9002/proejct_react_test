@@ -6,10 +6,10 @@ const Header = () => {
     <div>
       <Navbar bg="light" expand="lg" className="justify-content-between">
       <Container>
-        <Navbar.Brand href="#" className="navbar-brand">딸깍</Navbar.Brand>
+        <Navbar.Brand href="/" className="navbar-brand">딸깍</Navbar.Brand>
         <Nav className="me-auto">
           <Link className="nav-link" to="#">이미지 생성</Link>
-          <Link className="nav-link" to="#">굿즈 페이지</Link>
+          <Link className="nav-link" to="/goodslist">굿즈 페이지</Link>
         </Nav>
         <Nav>
           <Link className="nav-link" to="#">
