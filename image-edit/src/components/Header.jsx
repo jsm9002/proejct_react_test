@@ -8,7 +8,7 @@ const Header = () => {
       <Container>
         <Navbar.Brand href="/" className="navbar-brand">딸깍</Navbar.Brand>
         <Nav className="me-auto">
-          <Link className="nav-link" to="#">이미지 생성</Link>
+          <Link className="nav-link" to="/createimage">이미지 생성</Link>
           <Link className="nav-link" to="/goodslist">굿즈 페이지</Link>
         </Nav>
         <Nav>
@@ -22,7 +22,7 @@ const Header = () => {
               회원가입
             </Button>
           </Link>
-          <Link className="nav-link" to="#">
+          <Link className="nav-link" to="/basket">
             <img src="./images/basket.png" alt="Basket" className="basket"/>
           </Link>
         </Nav>

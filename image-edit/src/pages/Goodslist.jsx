@@ -5,12 +5,13 @@ import Button from 'react-bootstrap/Button';
 const Goodslist = () => {
   return (
     <div style={{margin:"0% 10%"}}>
-        <div style={{textAlign:"center"}}>
+        <div style={{width:"100%",textAlign:"center"}}>
+        <Button variant="outline-dark" type="button" className='goods-btn'>전체</Button> 
         <Button variant="outline-dark" type="button" className='goods-btn'>의류</Button> 
         <Button variant="outline-dark" type="button" className='goods-btn'>생활용품</Button>
         <Button variant="outline-dark" type="button" className='goods-btn'>모바일 악세서리</Button>
         </div>
-        <div style={{display:"flex",flexFlow:"row wrap"}}>
+        <div style={{display:"flex",flexFlow:"row wrap",justifyContent:'space-evenly'}}>
 
         <GoodsCard/>
         <GoodsCard/>
