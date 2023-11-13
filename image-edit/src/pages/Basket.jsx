@@ -44,6 +44,7 @@ const Basket = () => {
                      금액
                 </div>
             </div>
+            {/* 장바구니 아이템 정보 노출 */}
             {/* 장바구니에 넣은 아이템 표시 - 상품정보 / 사이즈/  */}
             <div className='basket-goods-list'>
                 <div className='first-list-box'>
@@ -61,11 +62,11 @@ const Basket = () => {
                 </div>
                 {/* 장바구니 정보표시 상품이미지 / 상품명 / 상품 색 */}
                 <div className='vtline' ></div>
-                <div className='second-box' style={{width:"50%",margin:"5px 0px",fontSize:"20px",display:"flex"}}>
+                <div className='second-box'>
                 <div style={{width:"40%"}}>
-                    <img className='image-box' style={{height:"200px",width:"150px",objectFit:"cover", margin:"5px"}} src="./images/GM5_누끼.png" alt="" />
+                    <img className='img-box'  src="./images/GM5_누끼.png" alt="" />
                 </div>
-                <div style={{width:"60%"}}>
+                <div className='txt-info' style={{width:"60%"}}>
                     <div style={{height:"50%"}}>
                         상품명
                     </div>
@@ -75,12 +76,13 @@ const Basket = () => {
                 </div>
                 </div>
                 <div  className='vtline' ></div>
-                <div className='count-box' style={{width:"20%",margin:"5px 0px",fontSize:"20px"}}>
+                <div className='count-box' >
                     <div style={{height:"50%"}}>
                         사이즈
-
                     </div>
-                    <div style={{height:"50%"}}>수량</div>
+                    <div style={{height:"50%"}}>
+                        수량
+                    </div>
                 </div>
                 <div  className='vtline' ></div>
                 <div style={{width:"20%",margin:"5px 0px",fontSize:"20px"}}>
