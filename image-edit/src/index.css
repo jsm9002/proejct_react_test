@@ -73,15 +73,3 @@ code {
   height: 1px;
   border:0;
 }
-/* 장바구니 전체 체크 메뉴 */
-.basket-all-check{
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  display: flex;
-}
-/* 장바구니 메뉴 위쪽 텍스트 일자/상품번호 등등 */
-.basket-top-check{
-  margin:10px 10px;
-  font-size:20px;
-
-}

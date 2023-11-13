@@ -9,6 +9,7 @@ import CreateImage from './pages/CreateImage';
 import GoodsDetail from './pages/GoodsDetail';
 import BuyScript from './pages/BuyScript';
 import Basket from './pages/Basket';
+import Example from './components/Example';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/buyscript" element={<BuyScript/>}/>
         <Route path="/basket" element={<Basket/>}/>
         <Route path="/*" element={<NotFound/>} />
+        <Route path="/test" element={<Example/>}/>
       </Routes>
     </div>
   );

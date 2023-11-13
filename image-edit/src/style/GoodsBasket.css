@@ -1,0 +1,77 @@
+/* 장바구니 페이지 맨 위에 큰 장바구니 텍스트 */
+.basket-top-text .title{
+    font-size: 40px;
+    font-weight: bold;
+}
+/* 장바구니 페이지 두번쨰줄 텍스트 */
+.basket-top-text .subtitle{
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+}
+/* 장바구니 전체 체크 메뉴 */
+.basket-all-check{
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
+    display: flex;
+  }
+  /* 장바구니 메뉴 위쪽 텍스트 일자/상품번호 등등 */
+.basket-all-check .inner-box {
+    width:100%;
+    background-color: whitesmoke;
+    margin: 5px 0px;
+    display: flex;
+  }
+/* 전체선택 / 선택삭제 폰트사이즈 및 마진 */
+.basket-top-check{
+    margin:10px 10px;
+    font-size:20px;
+  }
+
+/* 장바구니 정보 위의 안내 제목 div 크기설정*/
+.basket-goods-title{
+    display: flex;
+    text-align: center;
+    height: 60px;
+    margin: 10px 0px;
+}
+/* 장바구니 정보 안내제목 - 폰트사이즈 및 마진 */
+.basket-goods-title .inner-times{
+    margin: 10px 0px;
+    font-size: 20px;
+    display: grid;
+    place-items: center;
+  }
+
+/* 상품정보 div 크기 및 flex설정  */
+.basket-goods-list {
+    display:flex;
+    text-align:center;
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+}
+/* 상품정보 div 안에서 가장 왼쪽 박스 div 크기및 flex 설정  */
+.basket-goods-list .first-list-box{
+    width:20%;
+    margin:4px 0px;
+    font-size:20px;
+    display:flex;
+}
+/* 상품정보 div 의 왼쪽에서 첫번쨰 박스의 체크박스 div */
+.basket-goods-list .first-list-box .inner-check-box{
+    height:100%;
+    width:20%;
+    display: grid; 
+    place-items: center;
+}
+/* 상품정보 div 의 왼쪽에서 첫번쨰 박스의 일자/상품번호 div */
+.basket-goods-list .first-list-box .inner-info-box{
+    width:80%;
+    height:100%;
+    display: grid;
+    place-items: center;
+}
+.basket-goods-list .vtline{
+    border-right: 1px solid black;
+    margin: 5px 0px;
+}
