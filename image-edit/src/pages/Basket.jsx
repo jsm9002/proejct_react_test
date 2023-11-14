@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../style/GoodsBasket.css"
-
+import BasketItem from '../components/BasketItem'
+import BasketSummary from '../components/BasketSummary'
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/esm/Button';
 const Basket = () => {
+
+ 
+    
   return (
     <div style={{margin: "0% 10%"}}>
         <div className='basket-top-text'>
@@ -20,13 +26,13 @@ const Basket = () => {
             <div className='inner-box'> 
                 <input className='basket-top-check' type="checkbox" />
                 <p className='basket-top-check' >전체선택</p> 
-                <div style={{borderLeft:"1px solid darkgray",margin:"0px 10px"}}>
+                <div style={{borderLeft:"1px solid lightgray",margin:"0px 10px"}}>
                     <p className='basket-top-check'>선택삭제</p>
                 </div>  
             </div>    
         </div>
         <div style={{padding:"10px 0px"}}>
-            <div className='basket-goods-title' style={{display:"flex",textAlign:"center",height:"60px",margin:"10px 0px"}}>
+            <div className='basket-goods-title'>
                 <div className='inner-times'style={{width:"20%"}}>
                     일자 
                     <br /> 
@@ -46,49 +52,13 @@ const Basket = () => {
             </div>
             {/* 장바구니 아이템 정보 노출 */}
             {/* 장바구니에 넣은 아이템 표시 - 상품정보 / 사이즈/  */}
-            <div className='basket-goods-list'>
-                <div className='first-list-box'>
-                <div className='inner-check-box'>
-                <input type="checkbox"/>
-                </div>
-                <div className='inner-info-box' >
-                    <div style={{height:"50%"}}>
-                    <h6>2023.11.22</h6>
-                    </div>
-                    <div style={{height:"50%"}}>
-                    <h6>21532245</h6>
-                    </div>
-                </div>    
-                </div>
-                {/* 장바구니 정보표시 상품이미지 / 상품명 / 상품 색 */}
-                <div className='vtline' ></div>
-                <div className='second-box'>
-                <div style={{width:"40%"}}>
-                    <img className='img-box'  src="./images/GM5_누끼.png" alt="" />
-                </div>
-                <div className='txt-info' style={{width:"60%"}}>
-                    <div style={{height:"50%"}}>
-                        상품명
-                    </div>
-                    <div style={{height:"50%"}}>
-                        빨간색
-                    </div>
-                </div>
-                </div>
-                <div  className='vtline' ></div>
-                <div className='count-box' >
-                    <div style={{height:"50%"}}>
-                        사이즈
-                    </div>
-                    <div style={{height:"50%"}}>
-                        수량
-                    </div>
-                </div>
-                <div  className='vtline' ></div>
-                <div style={{width:"20%",margin:"5px 0px",fontSize:"20px"}}>
-                     20,000원
-                </div>
-            </div>
+            <BasketItem/>
+        </div>
+        <BasketSummary/>
+        <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
+        <Link to={'/buyscript'} style={{textDecoration:"none"}}>
+        <Button style={{height:"64px",lineHeight:"64px",display:"block",backgroundColor:"#0028ac",width:"200px",textAlign:"center",borderRadius:"8px",color:"white",fontWeight:"bold",fontSize:"20px"}}>구매하기</Button>
+        </Link>
         </div>
     </div>
   )

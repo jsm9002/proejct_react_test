@@ -11,8 +11,8 @@
 }
 /* 장바구니 전체 체크 메뉴 */
 .basket-all-check{
-    border-top: 1px solid darkgray;
-    border-bottom: 1px solid darkgray;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     display: flex;
   }
   /* 장바구니 메뉴 위쪽 텍스트 일자/상품번호 등등 */
@@ -47,9 +47,10 @@
 .basket-goods-list {
     display:flex;
     text-align:center;
-    border-top:1px solid black;
-    border-bottom:1px solid black;
+    border-top:1px solid lightgray;
+    border-bottom:1px solid lightgray;
     background-color: whitesmoke;
+    margin: 20px 0px;
 }
 /* 상품정보 div 안에서 가장 왼쪽 박스 div 크기및 flex 설정  */
 .basket-goods-list .first-list-box{
@@ -74,7 +75,11 @@
 }
 /* 상품정보 div 안에 있는 세로줄 */
 .basket-goods-list .vtline{
-    border-right: 1px solid black;
+    border-right: 1px solid lightgray;
+    margin: 5px 0px;
+}
+.basket-goods-summary .vtline{
+    border-right: 1px solid lightgray;
     margin: 5px 0px;
 }
 /* 두번째 상품정보 div */
@@ -102,4 +107,14 @@
     width: 20%;
     margin: 5px 0px;
     font-size: 20px;   
+}
+.basket-goods-list .summary-price{
+    width: 20%;
+    margin: 5px 0px;
+    font-size: 20px;
+    display: grid;
+    place-items: center;
+}
+.basket-goods-list .count-btn{
+    margin: 0px 10px 0px 10px;   
 }

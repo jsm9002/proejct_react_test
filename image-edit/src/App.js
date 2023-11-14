@@ -10,6 +10,7 @@ import GoodsDetail from './pages/GoodsDetail';
 import BuyScript from './pages/BuyScript';
 import Basket from './pages/Basket';
 import Example from './components/Example';
+import Post from './components/Post';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/basket" element={<Basket/>}/>
         <Route path="/*" element={<NotFound/>} />
         <Route path="/test" element={<Example/>}/>
+        <Route path='/post' element={<Post/>}/>
       </Routes>
     </div>
   );

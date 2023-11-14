@@ -4,10 +4,10 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import "../style/GoodsDetail.css"
 const GoodsDetail = () => {
-  // 제품수량 선택을 위하 State
-  const [count,setCount]=useState(1)
-  // 가격을 나타내기 위하 State
-  const [sum,setSum]=useState(0)
+ // 제품수량 선택을 위하 State
+ const [count,setCount]=useState(1)
+ // 가격을 나타내기 위하 State
+ const [sum,setSum]=useState(0)
   // 사이즈 라디오버튼 state
   const [radioValue, setRadioValue] = useState('1');
 
@@ -41,7 +41,12 @@ const GoodsDetail = () => {
 
   // 제품수량에 따른 가격증감을 위한 useEffect
   useEffect(()=>{
+    if(count==0){
+      setCount(1)
+      setSum(price*count)
+    }else{
     setSum(price*count)
+    }
     console.log("useEffect 실행")
   },[count])
 
@@ -82,8 +87,8 @@ const GoodsDetail = () => {
           <h5 style={{fontWeight:"bold"}}>색상</h5>
           <div className="GoodsDetail-radio-flex" >
             <div>
-              <h6 style={{color:"red"}}>빨강</h6>
-           <input className='GoodsDetail-radio-color' type="radio" name="color" style={{accentColor:"red",backgroundColor:"red"}}/>
+              <h6 style={{color:"#FF0000"}}>빨강</h6>
+           <input className='GoodsDetail-radio-color' type="radio" name="color" style={{accentColor:"#FF0000",backgroundColor:"#FF0000"}}/>
            </div>
            <div>
             <h6 style={{color:"green"}}>초록</h6>

@@ -1,23 +1,118 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import '../style/BuyScript.css'
+import BasketItem from '../components/BasketItem'
+import Button from 'react-bootstrap/esm/Button';
+import Post from '../components/Post'
 
 const BuyScript = () => {
+
+  const [enroll_company, setEnroll_company] = useState({
+    address: '',
+  });
+
+  const [popup, setPopup] = useState(false);
+
+  const handleInput = (e) => {
+    setEnroll_company({
+      ...enroll_company,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleComplete = (data) => {
+    setPopup(!popup);
+  }
+
   return (
-    <div style={{margin: "0% 10%"}}>
-        <div className='buyscript-top-text'>
-        <div>
-            <h3>주문서 작성</h3>
+    <div style={{ minWidth:"800px",margin: "0% 10%", padding: "10px 0px 50px 0px" }}>
+      {/* 맨위 타이틀 텍스트 */}
+      <div className='buyscript-top-text'>
+        <div className='title'>
+          <p>주문서 작성</p>
         </div>
-        <div style={{fontWeight:"bold", display:"flex"}}>
-            <h4 style={{color:"#bebebe"}}>장바구니</h4>
-            <h4>-</h4>
-            <h4>주문서작성</h4>
-            <h4>-</h4>
-            <h4 style={{color:"#bebebe"}}>주문완료</h4>
+        <div className='subtitle'>
+          <p style={{ color: "#bebebe" }}>장바구니</p>&nbsp;&nbsp;
+          <p>—</p>&nbsp;&nbsp;
+          <p>주문서작성</p>&nbsp;&nbsp;
+          <p>—</p>&nbsp;&nbsp;
+          <p style={{ color: "#bebebe" }}>주문완료</p>
         </div>
-        
+      </div>
+
+
+      {/* 주문자 정보 */}
+      <div className='input-area'>
+        <div className='title' >
+          <p >주문자정보</p>
         </div>
+        <div style={{ height: "150px" }}>
+          <div style={{ height: "50px", display: "flex" }}>
+            <div className='subtitle' >이름</div>
+            <div className='input-txt-box' >
+              <input className='input-place' type='text' placeholder='이름을 입력해주세요'></input></div>
+          </div>
+          <div style={{ height: "50px", display: "flex" }}>
+            <div className='subtitle' >연락처</div>
+            <div className='input-txt-box' >
+              <input className='input-place' type='text' placeholder='연락처를 입력해주세요'></input></div>
+          </div>
+          <div style={{ height: "50px", display: "flex" }}>
+            <div className='subtitle' >이메일</div>
+            <div className='input-txt-box'  >
+              <input className='input-place' type='text' placeholder='이메일를 입력해주세요'></input></div>
+          </div>
+        </div>
+      </div>
+
+
+      {/* 배송정보 */}
+      <div className='input-area'>
+        <div className='title' >
+          <p>배송지 정보</p>
+        </div>
+        <div style={{ height: "250px" }}>
+          <div style={{ height: "50px", display: "flex" }}>
+            <div className='subtitle' >수령인</div>
+            <div className='input-txt-box'>
+              <input className='input-place' type='text' placeholder='수령인의 이름을 입력해주세요'></input></div>
+          </div>
+          <div style={{ height: "50px", display: "flex" }}>
+            <div className='subtitle' >연락처</div>
+            <div className='input-txt-box'  >
+              <input className='input-place' type='text' placeholder='수령인의 연락처를 입력해주세요'></input></div>
+          </div>
+          <div style={{ height: "50px", display: "flex" }}>
+            <div className='subtitle' >배송지</div>
+            <div className='input-txt-box'>
+            <input className='input-place' style={{width:"80%"}} type='text' placeholder='수령인의 주소를 입력해주세요' required={true} onChange={handleInput} value={enroll_company.address}/>
+            {/* <input className="user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} /> */}
+            <button style={{height:"100%"}} onClick={handleComplete}> 우편번호 찾기 </button>
+            {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+            </div>
+          </div>
+          <div style={{ height: "50px", display: "flex" }}>
+            <div className='subtitle' ></div>
+            <div className='input-txt-box' >
+              <input className='input-place' type='text' placeholder='상세주소를 입력해주세요'></input>
+            </div>
+          </div>
+          <div style={{ height: "50px", display: "flex" }}>
+            <div className='subtitle' >배송메모</div>
+            <div className='input-txt-box' >
+              <input className='input-place' type='text' placeholder='배송 메세지를 입력해주세요'></input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <BasketItem />
+      </div>
+      <div className='buy-submit-div' style={{ width: "100%", display: "grid", textAlign: "center", placeItems: "center" }}>
+        <Button className='buy-submit-btn'>결제하기</Button>
+      </div>
     </div>
-  )
+  ) 
 }
 
 export default BuyScript
