@@ -2,7 +2,7 @@ import React from 'react'
 
 const BasketSummary = () => {
   return (
-    <div className="basket-goods-summary" style={{padding:"15px 0px",fontSize:"20px"}}>
+    <div className="basket-goods-summary" style={{ padding:"15px 0px",fontSize:"20px"}}>
             <div style={{display:"flex",textAlign:"center"}}>
                 <div style={{width:"70%"}}>총 상품 가격</div>
                 <div style={{width:"20%"}}>배송비</div>

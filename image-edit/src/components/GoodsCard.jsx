@@ -7,7 +7,7 @@ const GoodsCard = () => {
   return (
     <div style={{margin:"5px 5px"}}>
     <Link to={'/goodsdetail'} style={{textDecoration:"none"}}>
-    <Card style={{ width: '18rem',textAlign:"center"}} >
+    <Card style={{ width: '18rem',textAlign:"center",border:"none"}} >
         {/* 제품 이미지 */}
     <div style={{textAlign:"center"}}>
     <Card.Img variant="top" src="./images/GM1_누끼.png" style={{width:"auto",height:"auto",maxWidth:"250px",maxHeight:"350px"}}/>
@@ -21,12 +21,12 @@ const GoodsCard = () => {
     
     <ListGroup className="list-group-flush">
         {/* 제품 가격 */}
-        <div style={{display:"flex"}}>
-      <ListGroup.Item style={{width:"50%"}}>20,000원</ListGroup.Item>
-      <ListGroup.Item style={{width:"50%"}}>별점 0.00점</ListGroup.Item>
+        <div style={{display:"flex", broder:"none"}}>
+      <p style={{width:"50%" , }}>20,000원</p>
+      <p style={{width:"50%" , }}>별점 0.00점</p>
       </div>
     </ListGroup>
-  </Card>
+  </Card> 
   </Link>
   </div>
   )

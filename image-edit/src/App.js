@@ -11,6 +11,7 @@ import BuyScript from './pages/BuyScript';
 import Basket from './pages/Basket';
 import Example from './components/Example';
 import Post from './components/Post';
+import Complete from './pages/Complete';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/*" element={<NotFound/>} />
         <Route path="/test" element={<Example/>}/>
         <Route path='/post' element={<Post/>}/>
+        <Route path='/complete' element={<Complete/>}/>
       </Routes>
     </div>
   );

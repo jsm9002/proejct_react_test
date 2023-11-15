@@ -9,7 +9,7 @@ const Basket = () => {
  
     
   return (
-    <div style={{margin: "0% 10%"}}>
+    <div style={{margin: "0% 10%", minWidth:"780px"}}>
         <div className='basket-top-text'>
         <div className="title">
             장바구니

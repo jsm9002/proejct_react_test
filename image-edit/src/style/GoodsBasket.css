@@ -21,6 +21,7 @@
     background-color: whitesmoke;
     margin: 5px 0px;
     display: flex;
+    min-width: 780px;
   }
 /* 전체선택 / 선택삭제 폰트사이즈 및 마진 */
 .basket-top-check{
@@ -36,7 +37,7 @@
     margin: 10px 0px;
 }
 /* 장바구니 정보 안내제목 - 폰트사이즈 및 마진 */
-.basket-goods-title .inner-times{
+.basket-goods-title .inner-items{
     margin: 10px 0px;
     font-size: 20px;
     display: grid;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 const BasketItem = () => {
@@ -61,7 +62,8 @@ const BasketItem = () => {
             <div className='vtline' ></div>
             <div className='second-box'>
                 <div style={{ width: "40%" }}>
-                    <img className='img-box' src="./images/GM4_누끼.png" alt="" />
+                    {/* <img className='img-box' src="./images/GM4_누끼.png" alt="" /> */}
+                    <Card.Img variant="top" src="./images/GM5_누끼.png" style={{width:"auto",height:"auto",maxWidth:"200px",maxHeight:"200px"}}/>
                 </div>
                 <div className='txt-info' style={{ width: "60%" }}>
                     {/* DB에서 상품번호를 기반으로 불러오기 */}

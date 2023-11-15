@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import '../style/BuyScript.css'
-import BasketItem from '../components/BasketItem'
 import Button from 'react-bootstrap/esm/Button';
 import Post from '../components/Post'
+import BuyScriptItem from '../components/BuyScriptItem';
+import BuyScriptSummary from '../components/BuyScriptSummary';
 
 const BuyScript = () => {
 
@@ -24,7 +26,7 @@ const BuyScript = () => {
   }
 
   return (
-    <div style={{ minWidth:"800px",margin: "0% 10%", padding: "10px 0px 50px 0px" }}>
+    <div style={{ minWidth: "800px", margin: "0% 10%", padding: "0px 0px 50px 0px" }}>
       {/* 맨위 타이틀 텍스트 */}
       <div className='buyscript-top-text'>
         <div className='title'>
@@ -84,10 +86,10 @@ const BuyScript = () => {
           <div style={{ height: "50px", display: "flex" }}>
             <div className='subtitle' >배송지</div>
             <div className='input-txt-box'>
-            <input className='input-place' style={{width:"80%"}} type='text' placeholder='수령인의 주소를 입력해주세요' required={true} onChange={handleInput} value={enroll_company.address}/>
-            {/* <input className="user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} /> */}
-            <button style={{height:"100%"}} onClick={handleComplete}> 우편번호 찾기 </button>
-            {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+              <input className='input-place' style={{ width: "80%" }} type='text' placeholder='수령인의 주소를 입력해주세요' required={true} onChange={handleInput} value={enroll_company.address} />
+              {/* <input className="user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} /> */}
+              <button style={{ height: "100%" }} onClick={handleComplete}> 우편번호 찾기 </button>
+              {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
             </div>
           </div>
           <div style={{ height: "50px", display: "flex" }}>
@@ -104,15 +106,37 @@ const BuyScript = () => {
           </div>
         </div>
       </div>
-
+      <div className='buyscript-goods-title'>
+        <div className='inner-items' style={{ width: "20%" }}>
+          일자
+          <br />
+          상품번호
+        </div>
+        <div className='inner-items' style={{ width: "50%" }}>
+          상품정보
+        </div>
+        <div className='inner-items' style={{ width: "20%" }}>
+          사이즈
+          <br />
+          수량
+        </div>
+        <div className='inner-items' style={{ width: "20%" }}>
+          금액
+        </div>
+      </div>
       <div>
-        <BasketItem />
+        <BuyScriptItem />
       </div>
-      <div className='buy-submit-div' style={{ width: "100%", display: "grid", textAlign: "center", placeItems: "center" }}>
-        <Button className='buy-submit-btn'>결제하기</Button>
-      </div>
+      <BuyScriptSummary />
+      <Link to="/complete" style={{ textDecoration: "none" }}>
+        <div className='buy-submit-div' style={{ width: "100%", display: "grid", textAlign: "center", placeItems: "center" }}>
+
+          <Button className='buy-submit-btn'>결제하기</Button>
+
+        </div>
+      </Link>
     </div>
-  ) 
+  )
 }
 
 export default BuyScript

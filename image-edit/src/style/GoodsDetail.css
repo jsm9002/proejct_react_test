@@ -27,12 +27,12 @@
 .GoodsDetail-size-btn-margin{
     margin: 5px 10px ;
 }
-.count-flex{
+.GoodsDetail .count-flex{
     float: right;
     display: flex;
     align-items: center;
 }
-.count-btn{
+.GoodsDetail .count-btn{
     margin: 0px 10px 0px 10px;
     align-items: center;
     text-align: center;
