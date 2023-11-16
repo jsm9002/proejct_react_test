@@ -23,7 +23,7 @@ function App() {
         <Route path='/imageall' element={<ImageAll/>}/>
         <Route path="/goodslist" element={<Goodslist/>}/>
         <Route path="/createimage" element={<CreateImage/>}/>
-        <Route path="/goodsdetail" element={<GoodsDetail/>}/>
+        <Route path="/goodsdetail/:PROD_ID" element={<GoodsDetail/>}/>
         <Route path="/buyscript" element={<BuyScript/>}/>
         <Route path="/basket" element={<Basket/>}/>
         <Route path="/*" element={<NotFound/>} />

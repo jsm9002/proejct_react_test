@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/esm/Button';
 const Basket = () => {
 
- 
-    
+    let items = sessionStorage.getItem('cartItem')
+    console.log(items)
+
   return (
     <div style={{margin: "0% 10%", minWidth:"780px"}}>
         <div className='basket-top-text'>
@@ -52,12 +53,13 @@ const Basket = () => {
             </div>
             {/* 장바구니 아이템 정보 노출 */}
             {/* 장바구니에 넣은 아이템 표시 - 상품정보 / 사이즈/  */}
+            {}
             <BasketItem/>
         </div>
         <BasketSummary/>
         <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
         <Link to={'/buyscript'} style={{textDecoration:"none"}}>
-        <Button style={{height:"64px",lineHeight:"64px",display:"block",backgroundColor:"#0028ac",width:"200px",textAlign:"center",borderRadius:"8px",color:"white",fontWeight:"bold",fontSize:"20px"}}>구매하기</Button>
+        <Button style={{height:"64px",lineHeight:"64px",display:"block",backgroundColor:"#0028ac",width:"200px",textAlign:"center",borderRadius:"8px",color:"white",fontWeight:"bold",fontSize:"20px"}}>주문하기</Button>
         </Link>
         </div>
     </div>
