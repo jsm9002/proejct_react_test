@@ -73,6 +73,7 @@
     height:100%;
     display: grid;
     place-items: center;
+    color: gray;
 }
 /* 상품정보 div 안에 있는 세로줄 */
 .basket-goods-list .vtline{
@@ -107,15 +108,28 @@
 .basket-goods-list .count-box{
     width: 20%;
     margin: 5px 0px;
-    font-size: 20px;   
+    font-size: 20px; 
 }
 .basket-goods-list .summary-price{
     width: 20%;
     margin: 5px 0px;
     font-size: 20px;
     display: grid;
-    place-items: center;
+    text-align: center;
+    align-items: center;
 }
-.basket-goods-list .count-btn{
-    margin: 0px 10px 0px 10px;   
+.basket-goods-list .count-box .count-btn{
+    margin: 0px 5px 0px 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 30%;
+    border:1px solid lightgray;
+    color:gray;
+    
+}
+.basket-goods-list .count-box .count-btn:hover{
+    background-color: black;
+    color:lightgray;
 }
