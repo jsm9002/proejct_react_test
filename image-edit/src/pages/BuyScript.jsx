@@ -8,6 +8,8 @@ import BuyScriptSummary from '../components/BuyScriptSummary';
 
 const BuyScript = () => {
 
+  const [buyItem, setBuyItem] = useState([]);
+
   const [enroll_company, setEnroll_company] = useState({
     address: '',
   });
@@ -24,7 +26,13 @@ const BuyScript = () => {
   const handleComplete = (data) => {
     setPopup(!popup);
   }
-
+  useEffect(() => {
+    const buyItems = sessionStorage.getItem('buyItem');
+    if (buyItems) {
+        setBuyItem(JSON.parse(buyItems))
+    }  
+    console.log(buyItem, "장바구니페이지 처음 랜더링")
+}, [])
   return (
     <div style={{ minWidth: "800px", margin: "0% 10%", padding: "0px 0px 50px 0px" }}>
       {/* 맨위 타이틀 텍스트 */}
@@ -125,7 +133,12 @@ const BuyScript = () => {
         </div>
       </div>
       <div>
-        <BuyScriptItem />
+        {
+          buyItem.map=((item)=>{
+            <BuyScriptItem item={item}/> 
+          })
+        }
+        
       </div>
       <BuyScriptSummary />
       <Link to="/complete" style={{ textDecoration: "none" }}>

@@ -10,18 +10,21 @@ const Basket = () => {
     // 세션스토리지에 있던 데이터를 불러와 저장할 State 
     const [cartItem, setCartItem] = useState([]);
 
+   const [sum , setSum] = useState(0)
+   
+   
+   
     /** 세션 로컬스토리지에 있는 데이터를 불러와 State에 저장 그리고 확인할 console */
     useEffect(() => {
         const cartItems = sessionStorage.getItem('cartItem');
         if (cartItems) {
             setCartItem(JSON.parse(cartItems))
-        }
+        }  
         console.log(cartItem, "장바구니페이지 처음 랜더링")
     }, [])
 
-
     return (
-        <div style={{ margin: "0% 10%", minWidth: "780px" }}>
+        <div style={{ margin:"0% 20%",minWidth: "780px"}}>
             <div className='basket-top-text'>
                 <div className="title">
                     장바구니
@@ -80,7 +83,7 @@ const Basket = () => {
                     <div style={{ width: "20%" }}>총 결제 금액</div>
                 </div>
                 <div style={{ display: "flex", textAlign: "center", borderTop: "1px solid lightgray", borderBottom: "1px solid lightgray" }}>
-                    <div style={{ width: "70%" }}>0원</div>
+                    <div style={{ width: "70%" }}>{sum}원</div>
                     <div className='vtline' ></div>
                     <div style={{ width: "20%" }}>0원</div>
                     <div className='vtline' ></div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 
-const BuyScriptItem = () => {
+const BuyScriptItem = ({item}) => {
   return (
     // map 함수로 값을 받을 예정
     <div className='buy-goods-list'>
@@ -11,11 +11,11 @@ const BuyScriptItem = () => {
         <div className='inner-info-box' >
             <div style={{ height: "50%" }}>
                 {/* 장바구니에 넣은날짜 /  */}
-                <h6>2023.11.22</h6>
+                <h6>{item.CARTED_AT}</h6>
             </div>
             <div style={{ height: "50%" }}>
                 {/* DB의 상품번호 / 세션 로컬 스토리지에 저장 */}
-                <h6>21532245</h6>
+                <h6>{item.PROD_ID}</h6>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@ const BuyScriptItem = () => {
         <div className='txt-info' style={{ width: "60%" }}>
             {/* DB에서 상품번호를 기반으로 불러오기 */}
             <div style={{ height: "50%" }}>
-                스웨트 팬츠
+                {item.PROD_NAME}
             </div>
             {/* 세션 스토리지 저장 */}
             <div style={{ height: "50%" }}>
@@ -43,7 +43,7 @@ const BuyScriptItem = () => {
         <div style={{ height: "50%", display: "grid", placeItems: "center" }}>
             사이즈
             <div>
-            L
+            {item.PROD_SIZE}
             </div>
         </div>
         {/* 세션 스토리지 저장 */}
@@ -51,7 +51,7 @@ const BuyScriptItem = () => {
             <div>수량</div>
             <div style={{ display: "flex", alignItems: "center" }}>
                 {/* 세션에 저장된 수량정보 가져오기 */}
-                <h6 >1</h6>
+                <h6 >{item.PROD_COUNT}</h6>
             </div>
         </div>
     </div>
