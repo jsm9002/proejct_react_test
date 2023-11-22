@@ -6,7 +6,7 @@ import COLOR from '../data/prd_color.json';
 import PRD_SIZE from '../data/prd_size.json';
 import PRD_INFO from '../data/product_info.json';
 
-const Basketitems = ({ items }) => {
+const Basketitems = ({ items,checked,oncheck }) => {
 
     console.log(items)
 
@@ -16,81 +16,18 @@ const Basketitems = ({ items }) => {
     const [sum, setSum] = useState(0)
 
     // 변경되는 사이즈 임시저장을 위한 State
-    const [size, setSize] = useState(items.PROD_SIZE)
+    const[size,setSize] = useState(items.PROD_SIZE)
 
     // 체크박스 체크 State
-    const [check, setCheck] = useState(true)
-    console.log(check, '장바구니아이템 체크박스')
+    const [checked, setChecked] = useState(false);
 
-    /** 체크박스 Blean 연산 주문서 세션에 삽입*/
-    const goToBuyItem = () => {
-        //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
-        if (check === true) {
-            let buyItem = {
-                'PROD_ID': `${items.PROD_ID}`// 상품 ID
-            };
-
-            // 로컬 스토리지에있는 정보를 일단 가져온다.
-            let cartItems = sessionStorage.getItem('cartItem');
-            let buyItems = sessionStorage.getItem('buyItem');
-
-            if (cartItems) {
-                // JSON 형태로 변환하고 새 상품 추가
-                cartItems = JSON.parse(cartItems);
-                buyItems = JSON.parse(buyItems);
-                // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
-                if ( buyItems.length > 0) {
-                    for (let i = 0; i < (parseInt(cartItems.length) - 1); i++) {
-                        if (cartItems[i].PROD_ID === buyItem.PROD_ID) {
-                            // 중복되는 물건ID를 가진 데이터 삭제
-                            buyItems[i].pop(buyItem.PROD_ID);
-                            // 중복되는 물건ID를 가진 새로운 데이터
-                            buyItems.push(items);
-                        }
-                    }
-                }else if(buyItems.length == 0){
-                    buyItems = [buyItem];
-                    buyItems.push(items);
-                }
-                
-            } else {
-                // 새 배열 생성
-                
-            }
-            // 업데이트된 장바구니 데이터를 다시 JSON 형태로 변환하여 저장
-            sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
-        } else if (check === false) {
-            let buyItem = {
-                'PROD_ID': `${items.PROD_ID}`
-            } // 상품 ID
-            // 로컬 스토리지에있는 정보를 일단 가져온다.
-            let buyItems = sessionStorage.getItem('buyItem');
-
-            if (buyItems) {
-                // JSON 형태로 변환하고 새 상품 추가
-                buyItems = JSON.parse(buyItems);
-                console.log(buyItem, "장바구니체크해제시 세션삭제");
-
-                // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
-                for (let i = 0; i < parseInt(buyItems.length); i++) {
-                    if (buyItems[i].PROD_ID === buyItem.PROD_ID) {
-                        // 중복되는 물건ID를 가진 데이터 삭제
-                        buyItems.pop(buyItem.PROD_ID);
-                        // 중복되는 물건ID를 가진 새로운 데이터
-                    }
-                }
-                // cartItems.push(newCartItem);
-            } else {
-                // 새 배열 생성
-                buyItems = [buyItem];
-            }
-            // 업데이트된 장바구니 데이터를 다시 JSON 형태로 변환하여 저장
-            sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
-        }
-    }
     // 개수와 합계가격을 위해 별도로 변수선언
     let price = items.PROD_PRICE;
     console.log(price, "가격")
+
+    const handleCheckboxChange = (e) => {
+        oncheck(e.target.checked);
+    }
 
     // 컬러 한글이름을 노출시키기 위한 필터함수()
     const color_filter = COLOR.filter(item => item.COLOR_CODE === items.PROD_COLOR)
@@ -129,22 +66,21 @@ const Basketitems = ({ items }) => {
 
     /** 굿즈 사이즈 수정 */
     //  select 구문에서 수정될 값을 받아 size State 에 넣어주는 구문
-    const sizeChange = (e) => {
+    const sizeChange = (e) =>{
         setSize(e.target.value)
-        console.log(size, "sizeChang사이즈변경")
+        console.log(size,"sizeChang사이즈변경")
     }
 
 
 
     /**장바구니에 담겨있는 데이터를 변경하기 위한 함수 */
     function correctItemToCart() {
-
         //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
         let correctCartItem = {
             'PROD_ID': `${items.PROD_ID}`, // 상품 ID
             'PROD_NAME': `${items.PROD_NAME}`, // 상품명
             'PROD_SIZE': `${size}`, // 상품 사이즈 State 를 통한 값 수정
-            'PROD_COLOR': `${items.PROD_COLOR}`, // 상품 색상
+            'PROD_COLOR': `${color_filter.COLOR_CODE}`, // 상품 색상
             'PROD_COUNT': `${count}`, // 상품 수량 State 를 통한 값 수정
             'PROD_PRICE': `${items.PROD_PRICE}`, //상품 가격
             'CARTED_AT': `${items.CARTED_AT}` //굿즈 상세페이지에서 카트에 넣을 당시의 시각
@@ -180,19 +116,47 @@ const Basketitems = ({ items }) => {
         sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
     }
 
-    useEffect(() => {
-        goToBuyItem()
-    }, [check])
+    const GoToBuyItems = () => {
+        let buyItems = JSON.parse(sessionStorage.getItem('buyItem')) || [];
+
+        if(checked){
+            buyItems = [...buyItems].filter(item => item.PROD_ID !== items.PROD_ID);
+            buyItems.push({...items, PROD_SIZE:size, PROD_COUNT:count});
+        }else{
+            buyItems = [...buyItems].filter(item => item.PROD_ID !== items.PROD_ID);
+        }
+
+        sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
+    };
+
+    const handleCheckbox = (e) => {
+        setChecked(e.target.checked)
+        GoToBuyItems(e.target.checked)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         correctItemToCart()
-    }, [count, size])
+    }, [count,size])
 
     return (
         <div className='basket-goods-list'>
             <div className='first-list-box'>
                 <div className='inner-check-box'>
-                    <input type="checkbox" value={check} onClick={() => setCheck(!check)} />
+                    <input type="checkbox"
+                    checked={checked}
+                    onChange={handleCheckboxChange} />
                 </div>
                 <div className='inner-info-box' >
                     <div style={{ height: "50%" }}>
@@ -219,7 +183,7 @@ const Basketitems = ({ items }) => {
                     </div>
                     <div style={{ height: "50%" }}>
                         {color_filter[0]?.COLOR_NAME}
-                        <button style={{ cursor: "default", borderRadius: "50%", width: "20px", height: "20px", backgroundColor: `${items.PROD_COLOR}` }}></button>
+                        <button style={{cursor:"default", borderRadius: "50%", width: "20px", height: "20px", backgroundColor: `${items.PROD_COLOR}` }}></button>
                     </div>
                 </div>
             </div>
@@ -231,7 +195,7 @@ const Basketitems = ({ items }) => {
                     <div>
                         <select onChange={sizeChange} name="size" id="">
                             {prd_size_filter.map((size) => {
-                                return ((size.SIZE_NAME == items.PROD_SIZE ? <option value={size.SIZE_NAME} selected>{size.SIZE_NAME} </option> : <option value={size.SIZE_NAME} defaultValue={items.PROD_SIZE}>{size.SIZE_NAME} </option>))
+                                return ((size.SIZE_NAME == items.PROD_SIZE ? <option  value={size.SIZE_NAME} selected>{size.SIZE_NAME} </option> : <option value={size.SIZE_NAME} defaultValue={items.PROD_SIZE}>{size.SIZE_NAME} </option>))
                             })}
                         </select>
                     </div>

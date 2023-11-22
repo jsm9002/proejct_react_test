@@ -9,22 +9,37 @@ const Basket = () => {
 
     // 세션스토리지에 있던 데이터를 불러와 저장할 State 
     const [cartItem, setCartItem] = useState([]);
-
-   const [sum , setSum] = useState(0)
-   
-   
-   
+    const [selectedItem, setSelectItem] = useState({});
+    const [sum, setSum] = useState(0)
+    //전체선택 상태관리
+    const [allChecked, setAllChecked] = useState(false);
+    // 전체선택 이벤트함수
+    const handleSelectAll = () => {
+        const newSelectedItems = {};
+        if (!allChecked) {
+            cartItem.forEach(item => {
+                newSelectedItems[item.id] = true;
+            });
+        }
+        setSelectItem(newSelectedItems);
+        setAllChecked(!allChecked);
+    };
+    const handleItemCheck = (id, checked) => {
+        setSelectItem(prev => ({ ...prev, [id]: checked }));
+    };
+    const Itemchecked = id => selectedItem[id];
+    const allCheck = cartItem.length > 0 && cartItem.every(item=> selectedItem[item.id]);
     /** 세션 로컬스토리지에 있는 데이터를 불러와 State에 저장 그리고 확인할 console */
     useEffect(() => {
         const cartItems = sessionStorage.getItem('cartItem');
         if (cartItems) {
             setCartItem(JSON.parse(cartItems))
-        }  
+        }
         console.log(cartItem, "장바구니페이지 처음 랜더링")
     }, [])
 
     return (
-        <div style={{ margin:"0% 20%",minWidth: "780px"}}>
+        <div style={{ margin: "0% 20%", minWidth: "780px" }}>
             <div className='basket-top-text'>
                 <div className="title">
                     장바구니
@@ -37,10 +52,11 @@ const Basket = () => {
                     <p style={{ color: "#bebebe" }}>주문완료</p>
                 </div>
             </div>
-{/* 장바구니의 전체선택님 하나하나 선택되는 기능 구현 예정 */}
+            {/* 장바구니의 전체선택님 하나하나 선택되는 기능 구현 예정 */}
             <div className='basket-all-check' >
                 <div className='inner-box'>
-                    <input className='basket-top-check' type="checkbox" />
+                    <input className='basket-top-check' type="checkbox" checked={allChecked}
+                        onChange={handleSelectAll} />
                     <p className='basket-top-check' >전체선택</p>
                     <div style={{ borderLeft: "1px solid lightgray", margin: "0px 10px" }}>
                         <p className='basket-top-check'>선택삭제</p>
@@ -66,11 +82,11 @@ const Basket = () => {
                         금액
                     </div>
                 </div>
-{/* 세션에 들어있는 장바구니에 들어가 있는 제품들의 정보를 컴포넌트를 통해 map 으로 뿌려줌 */}
+                {/* 세션에 들어있는 장바구니에 들어가 있는 제품들의 정보를 컴포넌트를 통해 map 으로 뿌려줌 */}
                 {cartItem.map((item) => {
                     console.log(item, "mapTEST")
                     return (
-                        <BasketItem items={item} />
+                        <BasketItem key={item.id} items={item} checked={Itemchecked(item.id)} oncheck = {(checked) => handleItemCheck(item.id, checked)}/>
                     );
                 })}
 
