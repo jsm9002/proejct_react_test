@@ -7,6 +7,7 @@ import prd_size from '../data/prd_size.json'
 import prd_info from '../data/product_info.json'
 import "../style/GoodsDetail.css"
 import { useParams } from 'react-router-dom';
+import {v4 as uuidv4} from 'uuid';
 
 
 const GoodsDetail = () => {
@@ -49,7 +50,7 @@ const GoodsDetail = () => {
   console.log(prd_color_filter, "필터링 컬러 정보")
   console.log(prd_size_filter, "필터링 사이즈 정보")
   console.log(radioValue, "라디오스테이트")
-  
+
 
 
   //  해당제품의 가격 데이터 
@@ -99,7 +100,9 @@ const GoodsDetail = () => {
       'PROD_COLOR': `${color}`, // 상품 색상
       'PROD_COUNT': `${count}`, // 상품 수량
       'PROD_PRICE': `${prd_info_filter[0].PROD_PRICE}`, //상품 가격
-      'CARTED_AT': `${times}`
+      'CARTED_AT': `${times}`,
+      'PRICE_SUM':`${parseInt(count)*parseInt(prd_info_filter[0].PROD_PRICE)}`,
+      'PROD_UUID' : uuidv4()
     };
 
     // 로컬 스토리지에있는 정보를 일단 가져온다.
@@ -113,12 +116,12 @@ const GoodsDetail = () => {
 
       // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
       for (let i = 0; i < parseInt(cartItems.length); i++) {
-        if (cartItems[i].PROD_ID === newCartItem.PROD_ID) {
+        if (cartItems[i].PROD_UUID === newCartItem.PROD_UUID) {
           // 중복되는 물건ID를 가진 데이터 삭제
-          cartItems.pop(newCartItem.PROD_ID);
+          cartItems.pop(newCartItem.PROD_UUID);
           // 중복되는 물건ID를 가진 새로운 데이터
           cartItems.push(newCartItem);
-        } else if (cartItems[i].PROD_ID === cartItems[parseInt(cartItems.length) - 1].PROD_ID) {
+        } else if (cartItems[i].PROD_UUID === cartItems[parseInt(cartItems.length) - 1].PROD_UUID) {
           console.log("중복되는 아이템이 없습니다.")
           cartItems.push(newCartItem);
         }

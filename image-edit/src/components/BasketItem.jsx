@@ -6,7 +6,7 @@ import COLOR from '../data/prd_color.json';
 import PRD_SIZE from '../data/prd_size.json';
 import PRD_INFO from '../data/product_info.json';
 
-const Basketitems = ({ items,checked,oncheck }) => {
+const Basketitems = ({  items, isChecked, onCheck }) => {
 
     console.log(items)
 
@@ -19,24 +19,40 @@ const Basketitems = ({ items,checked,oncheck }) => {
     const[size,setSize] = useState(items.PROD_SIZE)
 
     // 체크박스 체크 State
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(isChecked);
 
     // 개수와 합계가격을 위해 별도로 변수선언
     let price = items.PROD_PRICE;
     console.log(price, "가격")
 
-    const handleCheckboxChange = (e) => {
-        oncheck(e.target.checked);
-    }
+
+        // 부모 컴포넌트로부터 받은 isChecked prop이 변경될 때마다 checked 상태를 업데이트합니다.
+        // useEffect(() => {
+        //     setChecked(!checked);
+        // }, [checked]);
+
+
+        // GPT의견반영
+            // 체크박스 변경 핸들러
+    // const handleCheckboxChange = () => {
+    //     onCheck(items.id, !isChecked);
+    // };
+
+
+     // 체크박스 변경 핸들러
+     const handleCheckboxChange = () => {
+        setChecked(!checked); // 체크 상태를 토글합니다.
+        // 부모 컴포넌트에 변경 사항을 알립니다.
+        console.log(checked,'체크상태를 봅시다')
+        GoToBuyItems(); // 체크된 경우에만 goToBuyItems 호출
+    };
+
+
 
     // 컬러 한글이름을 노출시키기 위한 필터함수()
     const color_filter = COLOR.filter(item => item.COLOR_CODE === items.PROD_COLOR)
     const prd_size_filter = PRD_SIZE.filter(item => item.PROD_ID === items.PROD_ID)
     const prd_info_filter = PRD_INFO.filter(item => item.PROD_ID === items.PROD_ID)
-
-    console.log(prd_size_filter, '사이즈필터')
-    console.log(color_filter, "컬러필터")
-    console.log(prd_info_filter, "사진들")
     /** 수량조절버튼 조작을 위한 간단한 함수들 */
     // 빼기
     const subtract = () => {
@@ -83,7 +99,9 @@ const Basketitems = ({ items,checked,oncheck }) => {
             'PROD_COLOR': `${color_filter.COLOR_CODE}`, // 상품 색상
             'PROD_COUNT': `${count}`, // 상품 수량 State 를 통한 값 수정
             'PROD_PRICE': `${items.PROD_PRICE}`, //상품 가격
-            'CARTED_AT': `${items.CARTED_AT}` //굿즈 상세페이지에서 카트에 넣을 당시의 시각
+            'CARTED_AT': `${items.CARTED_AT}`, //굿즈 상세페이지에서 카트에 넣을 당시의 시각
+            'PRICE_SUM':`${parseInt(items.PROD_PRICE)*parseInt(count)}`,
+            'PROD_UUID' : `${items.PROD_UUID}`
         };
 
         // 로컬 스토리지에있는 정보를 일단 가져온다.
@@ -93,16 +111,16 @@ const Basketitems = ({ items,checked,oncheck }) => {
             // JSON 형태로 변환하고 새 상품 추가
             cartItems = JSON.parse(cartItems);
             console.log((cartItems.length), "세션기능TEST")
-            console.log(correctCartItem);
+            console.log(correctCartItem,'수정되는아이템');
 
             // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
             for (let i = 0; i < parseInt(cartItems.length); i++) {
-                if (cartItems[i].PROD_ID === correctCartItem.PROD_ID) {
+                if (cartItems[i].PROD_UUID === correctCartItem.PROD_UUID) {
                     // 중복되는 물건ID를 가진 데이터 삭제
-                    cartItems.pop(correctCartItem.PROD_ID);
+                    cartItems.pop(correctCartItem.PROD_UUID);
                     // 중복되는 물건ID를 가진 새로운 데이터
                     cartItems.push(correctCartItem);
-                } else if (cartItems[i].PROD_ID === cartItems[parseInt(cartItems.length) - 1].PROD_ID) {
+                } else if (cartItems[i].PROD_UUID === cartItems[parseInt(cartItems.length) - 1].PROD_UUID) {
                     console.log("중복되는 아이템이 없습니다.")
                     cartItems.push(correctCartItem);
                 }
@@ -119,44 +137,34 @@ const Basketitems = ({ items,checked,oncheck }) => {
     const GoToBuyItems = () => {
         let buyItems = JSON.parse(sessionStorage.getItem('buyItem')) || [];
 
-        if(checked){
-            buyItems = [...buyItems].filter(item => item.PROD_ID !== items.PROD_ID);
-            buyItems.push({...items, PROD_SIZE:size, PROD_COUNT:count});
+        if(!checked){
+            buyItems = [...buyItems].filter(item => item.PROD_UUID !== items.PROD_UUID);
+            buyItems.push({...items, PROD_SIZE:size, PROD_COUNT:count,PRICE_SUM:items.PRICE_SUM});
         }else{
-            buyItems = [...buyItems].filter(item => item.PROD_ID !== items.PROD_ID);
+            buyItems = [...buyItems].filter(item => item.PPROD_UUID !== items.PROD_UUID);
         }
 
         sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
     };
 
-    const handleCheckbox = (e) => {
-        setChecked(e.target.checked)
-        GoToBuyItems(e.target.checked)
-    }
-
-
-
-
-
-
-
-
-
-
-
 
 
     useEffect(() => {
-        correctItemToCart()
+        if(count == items.PROD_COUNT && size == items.PROD_SIZE){
+            console.log('추가할 값 없음')
+        }else{
+            correctItemToCart()
+        }
+       
     }, [count,size])
 
     return (
         <div className='basket-goods-list'>
             <div className='first-list-box'>
                 <div className='inner-check-box'>
-                    <input type="checkbox"
-                    checked={checked}
-                    onChange={handleCheckboxChange} />
+                    <input    type="checkbox"
+                checked={isChecked}
+                onChange={handleCheckboxChange} />
                 </div>
                 <div className='inner-info-box' >
                     <div style={{ height: "50%" }}>
