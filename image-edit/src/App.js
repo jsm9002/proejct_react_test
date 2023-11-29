@@ -12,6 +12,7 @@ import Basket from './pages/Basket';
 import Example from './components/Example';
 import Post from './components/Post';
 import Complete from './pages/Complete';
+import Test_111 from './components/Test_111';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/test" element={<Example/>}/>
         <Route path='/post' element={<Post/>}/>
         <Route path='/complete' element={<Complete/>}/>
+        <Route path='/test_111' element={<Test_111/>}/>
       </Routes>
     </div>
   );

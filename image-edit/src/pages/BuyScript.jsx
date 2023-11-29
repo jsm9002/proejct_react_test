@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import '../style/BuyScript.css'
 import Button from 'react-bootstrap/esm/Button';
@@ -7,20 +7,23 @@ import BuyScriptItem from '../components/BuyScriptItem';
 import BuyScriptSummary from '../components/BuyScriptSummary';
 
 const BuyScript = () => {
-
   const [buyItem, setBuyItem] = useState([]);
 
   const [enroll_company, setEnroll_company] = useState({
     address: '',
   });
 
+  const testRef = useRef()
+  console.log(testRef.current?.innerText,'REF 테스트')
+  
   const [popup, setPopup] = useState(false);
 
   const handleInput = (e) => {
     setEnroll_company({
       ...enroll_company,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value, 
     })
+    console.log(enroll_company)
   }
 
   const handleComplete = (data) => {
@@ -33,12 +36,13 @@ const BuyScript = () => {
     }  
     console.log(buyItem, "장바구니페이지 처음 랜더링")
 }, [])
+console.log(testRef.current.innerText,'REF 테스트2')
   return (
     <div style={{ minWidth: "800px", margin: "0% 10%", padding: "0px 0px 50px 0px" }}>
       {/* 맨위 타이틀 텍스트 */}
       <div className='buyscript-top-text'>
         <div className='title'>
-          <p>주문서 작성</p>
+          <p ref={testRef}>주문서 작성</p>
         </div>
         <div className='subtitle'>
           <p style={{ color: "#bebebe" }}>장바구니</p>&nbsp;&nbsp;
@@ -144,7 +148,7 @@ const BuyScript = () => {
       <Link to="/complete" style={{ textDecoration: "none" }}>
         <div className='buy-submit-div' style={{ width: "100%", display: "grid", textAlign: "center", placeItems: "center" }}>
 
-          <Button className='buy-submit-btn'>결제하기</Button>
+          <Button  variant="outline-dark" className='buy-submit-btn'>결제하기</Button>
 
         </div>
       </Link>

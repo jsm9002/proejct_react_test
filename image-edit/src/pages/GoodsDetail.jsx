@@ -5,9 +5,10 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import prd_color from '../data/prd_color.json'
 import prd_size from '../data/prd_size.json'
 import prd_info from '../data/product_info.json'
-import "../style/GoodsDetail.css"
+
 import { useParams } from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
+import "../style/GoodsDetail.css"
 
 
 const GoodsDetail = () => {
@@ -137,7 +138,7 @@ const GoodsDetail = () => {
 
 
   return (
-    <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
+    <div id="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
 {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
       <div style={{ backgroundColor: "green", width: "65%" }}>
         이미지 편집 공간</div>
@@ -199,11 +200,18 @@ const GoodsDetail = () => {
                   key={idx}
                   id={`item-${idx}`}
                   type="radio"
-                  variant={idx % 1 ? 'secondary' : 'outline-secondary'}
+                  variant={idx % 1 ? 'same-BTN-checked' : 'same-BTN'}
                   name="radio"
                   value={item.SIZE_NAME}
                   checked={radioValue === item.SIZE_NAME}
                   onChange={(e) => setRadioValue(e.currentTarget.value)}
+                  style={{
+                    backgroundColor: radioValue === item.SIZE_NAME ? '#FF7E00' : 'white',
+                    color: radioValue === item.SIZE_NAME ? 'white' : 'black',
+                    fontWeight:"bold",
+                    border:"1px solid lightgray"
+                    // 다른 스타일 속성들도 필요한 경우 여기에 추가할 수 있습니다.
+                  }}
                 >
                   {item.SIZE_NAME}
                 </ToggleButton>

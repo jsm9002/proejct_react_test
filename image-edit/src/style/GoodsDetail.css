@@ -27,12 +27,12 @@
 .GoodsDetail-size-btn-margin{
     margin: 5px 10px ;
 }
-.GoodsDetail .count-flex{
+#GoodsDetail .count-flex{
     float: right;
     display: flex;
     align-items: center;
 }
-.GoodsDetail .count-btn{
+#GoodsDetail .count-btn{
     margin: 0px 10px 0px 10px;
     align-items: center;
     text-align: center;
@@ -41,4 +41,18 @@
     width: 90%;
     height: 50px;
     font-size: 25px;
+}
+
+.same-BTN{
+    border-radius: 5px;
+    border:1px solid lightgray;
+    color:#453f3f;
+    background-color: #FF7E00;
+}
+
+.same-BTN-checked{
+    background-color: #FF7E00;
+    color:white;
+    border: none;
+    font-weight: bold;
 }
