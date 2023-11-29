@@ -1,0 +1,71 @@
+/* .input-rating-container{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+.input-rating-container legend{
+    text-align: right;
+}
+.input-rating-container input{
+    display: none;   
+}
+.input-rating-container label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+.input-rating-container label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.input-rating-container label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99) ;
+
+}
+.input-rating-container input[type=radio]:checked ~ label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+
+} */
+
+
+.input-rating-container {
+  display: inline-block;
+  direction: rtl;
+  border: 0;
+}
+.input-rating-container > input {
+  display: none;
+}
+.input-rating-container > label {
+  font-size: 3em;
+  color: transparent;
+  text-shadow: 0 0 0 #f0f0f0;
+}
+/* .input-rating-container > label:before {
+  display: inline-block;
+  font-size: 1rem;
+  padding: 0.3rem 0.2rem;
+  margin: 0;
+  cursor: pointer;
+  font-family: FontAwesome;
+  content: "\f005 ";
+} */
+.input-rating-container .half:before {
+  content: "\f089 ";
+  position: absolute;
+  padding-right: 0;
+}
+.input-rating-container input:checked ~ label,
+.input-rating-container label:hover,
+.input-rating-container label:hover ~ label {
+  color: rgba(250, 208, 0, 0.99) !important;
+}
+.input-rating-container input:checked + .input-rating-container label:hover,
+.input-rating-container input input:checked ~ label:hover,
+.input-rating-container
+  input:checked
+  ~ .input-rating-container
+  label:hover
+  ~ label,
+.input-rating-container label:hover ~ input:checked ~ label {
+  color: rgba(250, 208, 0, 0.99) !important;
+}
